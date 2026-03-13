@@ -338,6 +338,12 @@ import { User, Department, Designation } from '../../../core/models/models';
                 <mat-label>Address</mat-label>
                 <input matInput formControlName="address" />
               </mat-form-field>
+              <mat-form-field appearance="outline" style="grid-column:span 2">
+                <mat-label>New Password (blank = no change)</mat-label>
+                <input matInput type="password" formControlName="password"
+                  placeholder="Leave blank to keep existing password"/>
+                <mat-icon matSuffix>lock</mat-icon>
+              </mat-form-field>
             </div>
             <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:16px">
               <button mat-button type="button" (click)="cancelEdit()">Cancel</button>
@@ -436,6 +442,7 @@ export class AdminViewProfileComponent implements OnInit {
       salary: [emp.salary || ''],
       address: [emp.address || ''],
       joiningDate: [emp.joiningDate || ''],
+      password: [''],
     });
     this.editMode = true;
   }
@@ -444,10 +451,14 @@ export class AdminViewProfileComponent implements OnInit {
     this.editMode = false;
   }
 
-  saveEdit(): void {
+saveEdit(): void {
     if (!this.selectedEmployee || this.editForm.invalid) return;
     this.saving = true;
-    this.adminService.updateEmployee(this.selectedEmployee.id, this.editForm.value).subscribe({
+    const payload = { ...this.editForm.value };
+    if (!payload['password'] || payload['password'].trim() === '') {
+      delete payload['password'];
+    }
+    this.adminService.updateEmployee(this.selectedEmployee.id, payload).subscribe({
       next: () => {
         const v = this.editForm.value;
         this.selectedEmployee = {
