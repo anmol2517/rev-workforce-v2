@@ -1,0 +1,138 @@
+🔐 AUTH
+POST http://localhost:8080/rev/auth/login
+
+👑 ADMIN
+
+Dashboard
+GET http://localhost:8080/rev/api/admin/dashboard/stats
+GET http://localhost:8080/rev/api/admin/dashboard/main/stats
+
+Employees
+GET    http://localhost:8080/rev/api/admin/employees
+GET    http://localhost:8080/rev/api/admin/employees/search?query=John
+POST   http://localhost:8080/rev/api/admin/employees
+POST   http://localhost:8080/rev/api/admin/employees/bulk
+PUT    http://localhost:8080/rev/api/admin/employees/{id}
+DELETE http://localhost:8080/rev/api/admin/employees/{id}
+PUT    http://localhost:8080/rev/api/admin/employees/{id}/deactivate
+PUT    http://localhost:8080/rev/api/admin/employees/{id}/activate
+PUT    http://localhost:8080/rev/api/admin/employees/{employeeId}/assign-manager/{managerId}
+
+Departments
+GET    http://localhost:8080/rev/api/admin/departments
+GET    http://localhost:8080/rev/api/admin/departments/{id}
+POST   http://localhost:8080/rev/api/admin/departments
+POST   http://localhost:8080/rev/api/admin/departments/bulk
+PUT    http://localhost:8080/rev/api/admin/departments/{id}
+DELETE http://localhost:8080/rev/api/admin/departments/{id}
+
+Designations
+GET    http://localhost:8080/rev/api/admin/designations
+GET    http://localhost:8080/rev/api/admin/designations/{id}
+POST   http://localhost:8080/rev/api/admin/designations
+POST   http://localhost:8080/rev/api/admin/designations/bulk
+PUT    http://localhost:8080/rev/api/admin/designations/{id}
+DELETE http://localhost:8080/rev/api/admin/designations/{id}
+
+Leaves
+GET  http://localhost:8080/rev/api/admin/leaves/all
+GET  http://localhost:8080/rev/api/admin/leaves/types
+GET  http://localhost:8080/rev/api/admin/leaves/utilization
+POST http://localhost:8080/rev/api/admin/leaves/types/bulk-create
+PUT  http://localhost:8080/rev/api/admin/leaves/types/{leaveTypeId}
+PUT  http://localhost:8080/rev/api/admin/leaves/applications/{id}/approve
+PUT  http://localhost:8080/rev/api/admin/leaves/applications/{id}/reject
+DEL  http://localhost:8080/rev/api/admin/leaves/types/{leaveTypeId}
+
+Holidays
+GET    http://localhost:8080/rev/api/admin/holidays/all
+GET    http://localhost:8080/rev/api/admin/holidays/{id}
+POST   http://localhost:8080/rev/api/admin/holidays/add
+POST   http://localhost:8080/rev/api/admin/holidays/bulk-add
+PUT    http://localhost:8080/rev/api/admin/holidays/{id}
+DELETE http://localhost:8080/rev/api/admin/holidays/{id}
+
+Announcements
+GET    http://localhost:8080/rev/api/announcements
+GET    http://localhost:8080/rev/api/announcements/{id}
+POST   http://localhost:8080/rev/api/admin/announcements
+PUT    http://localhost:8080/rev/api/announcements/{id}
+DELETE http://localhost:8080/rev/api/announcements/{id}
+
+Goals
+GET http://localhost:8080/rev/api/admin/goals
+
+Audit Logs
+GET http://localhost:8080/rev/api/admin/audit-logs/all
+GET http://localhost:8080/rev/api/admin/audit-logs/user/{userId}
+
+Reports
+GET http://localhost:8080/rev/api/admin/reports/employees/excel
+GET http://localhost:8080/rev/api/admin/reports/employee/{id}/pdf
+
+👔 MANAGER
+Dashboard & Profile
+GET http://localhost:8080/rev/api/manager/dashboard/stats
+GET http://localhost:8080/rev/api/manager/profile
+PUT http://localhost:8080/rev/api/manager/profile
+GET http://localhost:8080/rev/api/manager/notifications
+Team
+GET http://localhost:8080/rev/api/manager/team-members
+GET http://localhost:8080/rev/api/manager/team-members/{employeeId}
+Leaves
+GET http://localhost:8080/rev/api/manager/leaves/applications
+GET http://localhost:8080/rev/api/manager/leaves/applications/{id}
+GET http://localhost:8080/rev/api/manager/leaves/team-calendar
+GET http://localhost:8080/rev/api/manager/leaves/team-balance
+PUT http://localhost:8080/rev/api/manager/leaves/applications/{id}/approve
+PUT http://localhost:8080/rev/api/manager/leaves/applications/{id}/reject
+Performance
+GET  http://localhost:8080/rev/api/manager/performance-reviews
+GET  http://localhost:8080/rev/api/manager/performance-reviews/{id}
+GET  http://localhost:8080/rev/api/manager/performance-reviews/{id}/feedback
+POST http://localhost:8080/rev/api/manager/performance-reviews/{id}/feedback
+Goals
+GET  http://localhost:8080/rev/api/manager/goals
+GET  http://localhost:8080/rev/api/manager/goals/{id}
+POST http://localhost:8080/rev/api/manager/goals
+PUT  http://localhost:8080/rev/api/manager/goals/{id}/comments
+Announcements
+POST http://localhost:8080/rev/api/manager/announcements
+
+👤 EMPLOYEE
+Dashboard & Profile
+GET http://localhost:8080/rev/api/employee/dashboard
+GET http://localhost:8080/rev/api/employee/profile
+PUT http://localhost:8080/rev/api/employee/profile
+GET http://localhost:8080/rev/api/employee/manager
+Leaves
+GET    http://localhost:8080/rev/api/employee/leaves/balance
+GET    http://localhost:8080/rev/api/employee/leaves/balance/{leaveTypeId}
+GET    http://localhost:8080/rev/api/employee/leaves/applications
+GET    http://localhost:8080/rev/api/employee/leaves/applications/{id}
+POST   http://localhost:8080/rev/api/employee/leaves/apply
+DELETE http://localhost:8080/rev/api/employee/leaves/applications/{id}/cancel
+Performance
+GET  http://localhost:8080/rev/api/employee/performance-reviews
+GET  http://localhost:8080/rev/api/employee/performance-reviews/{id}
+GET  http://localhost:8080/rev/api/employee/performance-reviews/{id}/feedback
+POST http://localhost:8080/rev/api/employee/performance-reviews
+Goals
+GET  http://localhost:8080/rev/api/employee/goals
+GET  http://localhost:8080/rev/api/employee/goals/{id}
+POST http://localhost:8080/rev/api/employee/goals
+PUT  http://localhost:8080/rev/api/employee/goals/{id}/progress
+Notifications
+GET http://localhost:8080/rev/api/employee/notifications
+GET http://localhost:8080/rev/api/employee/notifications/unread-count
+PUT http://localhost:8080/rev/api/employee/notifications/{id}/read
+PUT http://localhost:8080/rev/api/employee/notifications/all/read
+Misc
+GET http://localhost:8080/rev/api/employee/holidays
+GET http://localhost:8080/rev/api/employee/directory
+GET http://localhost:8080/rev/api/employee/directory/search?query=John
+GET http://localhost:8080/rev/api/employee/announcements
+GET http://localhost:8080/rev/api/employee/announcements/{id}
+GET http://localhost:8080/rev/api/employee/qrcode
+GET http://localhost:8080/rev/api/employee/qrcode/image
+GET http://localhost:8080/rev/api/employee/report/download
