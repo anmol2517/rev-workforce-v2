@@ -369,9 +369,9 @@ App runs at: **`http://localhost:4200`**
 
 | Role | Email | Password |
 |------|-------|----------|
-| **Admin** | sysadmin@revworkforce.com | Admin@123 |
-| **Manager** | arjun@revworkforce.com | Manager@123 |
-| **Employee** | aman@revworkforce.com | Employee@123 |
+| **Admin** | sysadmin@revworkforce.com | SysAdmin@123 |
+| **Manager** | arjun@revworkforce.com | Firstname@123 |
+| **Employee** | aman@revworkforce.com | Firstname@123 |
 
 > 💡 Default password for new employees: `FirstName@123`
 
@@ -404,7 +404,7 @@ Authorization: Bearer <jwt_token>
 | POST | `/auth/login` | Login & get JWT |
 
 ```json
-{ "email": "sysadmin@revworkforce.com", "password": "Admin@123" }
+{ "email": "sysadmin@revworkforce.com", "password": "SysAdmin@123" }
 ```
 
 ---
