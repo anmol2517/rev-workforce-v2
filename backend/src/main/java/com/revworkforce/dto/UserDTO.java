@@ -29,4 +29,8 @@ public class UserDTO {
     private String active;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    private String password;
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 }
