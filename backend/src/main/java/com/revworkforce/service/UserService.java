@@ -113,6 +113,10 @@ public class UserService implements UserDetailsService {
         user.setPhoneNumber(userDTO.getPhoneNumber());
         user.setAddress(userDTO.getAddress());
 
+        if (userDTO.getPassword() != null && !userDTO.getPassword().isBlank()) {
+            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        }
+
         if (userDTO.getDepartmentId() != null) {
             Department dept = departmentRepository.findById(userDTO.getDepartmentId())
                     .orElseThrow(() -> new RuntimeException("Department not found"));
