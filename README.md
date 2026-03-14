@@ -317,8 +317,8 @@ CREATE DATABASE revworkinghrm;
 **3. Update `application.properties`**
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/revworkinghrm
-spring.datasource.username=root
-spring.datasource.password=YOUR_PASSWORD
+spring.datasource.username=your-username
+spring.datasource.password=your-password
 
 jwt.secret=your_jwt_secret_minimum_32_characters_here
 jwt.expiration=86400000
