@@ -22,6 +22,10 @@ public class DataInitializer {
     CommandLineRunner init() {
         return args -> {
             String adminEmail = System.getenv("ADMIN_EMAIL");
+            String rawPassword = System.getenv("ADMIN_PASSWORD");
+            if (adminEmail == null || rawPassword == null || rawPassword.isBlank()) {
+                return;
+            }
             if (userRepository.findByEmail(adminEmail).isEmpty()) {
                 User admin = new User();
                 admin.setEmployeeId("SYS-001");

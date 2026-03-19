@@ -203,11 +203,14 @@ public class LeaveManagementController {
 
     @PostMapping("/bulk-assign")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ApiResponse> assignBulk(@RequestParam Long leaveTypeId, @RequestParam Integer quota) {
-        leaveBalanceService.assignBulkLeave(leaveTypeId, quota);
+    public ResponseEntity<ApiResponse> assignBulk(@RequestBody List<com.revworkforce.dto.LeaveBalanceDTO> dtos) {
+        for (com.revworkforce.dto.LeaveBalanceDTO dto : dtos) {
+            leaveBalanceService.assignBulkLeave(dto.getLeaveTypeId(), dto.getTotal());
+        }
         return ResponseEntity.ok(ApiResponse.builder()
                 .success(true)
-                .message("Bulk leave assigned successfully to all employees")
+                .message("Bulk leaves assigned successfully")
+                .data(null)
                 .status("success")
                 .timestamp(System.currentTimeMillis())
                 .build());

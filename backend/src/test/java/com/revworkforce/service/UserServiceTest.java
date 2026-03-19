@@ -72,12 +72,13 @@ public class UserServiceTest {
         testUserDTO.setLastName("Doe");
         testUserDTO.setDepartmentId(1L);
         testUserDTO.setDesignationId(1L);
+        testUserDTO.setRole("EMPLOYEE");
     }
 
     @Test
     public void testAddEmployee_Success() {
-        when(userRepository.findByEmail(anyString())).thenReturn(Optional.empty());
-        when(userRepository.findByEmployeeId(testUserDTO.getEmployeeId())).thenReturn(Optional.empty());
+        lenient().when(userRepository.findByEmail(anyString())).thenReturn(Optional.empty());
+        lenient().when(userRepository.findByEmployeeId(testUserDTO.getEmployeeId())).thenReturn(Optional.empty());
         when(departmentRepository.findById(1L)).thenReturn(Optional.of(testDepartment));
         when(designationRepository.findById(1L)).thenReturn(Optional.of(testDesignation));
         when(passwordEncoder.encode(anyString())).thenReturn("encoded_password");
@@ -93,11 +94,10 @@ public class UserServiceTest {
 
     @Test
     public void testAddEmployee_DuplicateEmail() {
-        when(userRepository.findByEmail(testUserDTO.getEmail())).thenReturn(Optional.of(testUser));
+        lenient().when(userRepository.findByEmail(testUserDTO.getEmail())).thenReturn(Optional.of(testUser));
 
         assertThrows(RuntimeException.class, () -> userService.addEmployee(testUserDTO));
     }
-
     @Test
     public void testGetUserById_Success() {
         when(userRepository.findById(1L)).thenReturn(Optional.of(testUser));

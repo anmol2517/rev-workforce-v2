@@ -30,6 +30,8 @@ public class UserService implements UserDetailsService {
     private final DesignationRepository designationRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuditLogService auditLogService;
+    private final LeaveBalanceRepository leaveBalanceRepository;
+    private final LeaveTypeRepository leaveTypeRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -87,11 +89,27 @@ public class UserService implements UserDetailsService {
         if (selectedRole == User.UserRole.EMPLOYEE && user.getDepartment() != null) {
             userRepository.findFirstByRoleAndDepartmentId(User.UserRole.MANAGER, user.getDepartment().getId())
                     .ifPresent(user::setManager);
-        } else {
-            user.setManager(null);
         }
 
         User savedUser = userRepository.save(user);
+
+        List<com.revworkforce.entity.LeaveType> allTypes = leaveTypeRepository.findAll();
+        if (!allTypes.isEmpty()) {
+            List<com.revworkforce.entity.LeaveBalance> initialBalances = allTypes.stream().map(type -> {
+                com.revworkforce.entity.LeaveBalance lb = new com.revworkforce.entity.LeaveBalance();
+                lb.setUser(savedUser);
+                lb.setLeaveType(type);
+                lb.setTotalQuota(15);
+                lb.setUsedLeaves(0);
+                lb.setRemainingLeaves(15);
+                lb.setYear(java.time.Year.now().getValue());
+                lb.setCreatedAt(LocalDateTime.now());
+                lb.setUpdatedAt(LocalDateTime.now());
+                return lb;
+            }).collect(Collectors.toList());
+            leaveBalanceRepository.saveAll(initialBalances);
+        }
+
         auditLogService.logAction("CREATE", "USER", savedUser.getId(), "User created: " + savedUser.getEmployeeId());
         return savedUser;
     }

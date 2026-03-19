@@ -60,12 +60,14 @@ public class LeaveBalanceService {
 
     public List<LeaveBalanceDTO> getEmployeeBalance(Long userId) {
         return leaveBalanceRepository.findByUserId(userId).stream()
-                .map(balance -> new LeaveBalanceDTO(
-                        balance.getLeaveType().getName(),
-                        balance.getTotalQuota(),
-                        balance.getUsedLeaves(),
-                        balance.getRemainingLeaves()
-                ))
+                .map(balance -> {
+                    LeaveBalanceDTO dto = new LeaveBalanceDTO();
+                    dto.setLeaveType(balance.getLeaveType().getName());
+                    dto.setTotal(balance.getTotalQuota());
+                    dto.setUsed(balance.getUsedLeaves());
+                    dto.setRemaining(balance.getRemainingLeaves());
+                    return dto;
+                })
                 .collect(Collectors.toList());
     }
 
